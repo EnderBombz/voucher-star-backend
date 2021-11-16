@@ -1,0 +1,24 @@
+{
+  "name": "voucher-star-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "5.0.1",
+    "body-parser": "1.19.0",
+    "canvas": "2.8.0",
+    "cors": "2.8.5",
+    "dotenv": "10.0.0",
+    "express": "4.17.1",
+    "jsonwebtoken": "8.5.1",
+    "mongodb": "4.1.4",
+    "mongoose": "6.0.12"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  },
+  "keywords": []
+}
