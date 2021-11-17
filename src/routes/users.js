@@ -7,5 +7,7 @@ router.get("/getByName/:userName", usersController.getByName);
 router.post("/check", usersController.check);
 router.post("/register", usersController.register);
 router.post("/generate-card", usersController.generateCard);
+router.post("/voucher", usersController.sendVouchers);
+router.post("/update-voucher", usersController.updateVouchers);
 
 module.exports = router;

@@ -44,6 +44,64 @@ exports.check = async (req, res) => {
   }
 };
 
+exports.updateVouchers = async (req, res) => {
+  try {
+    const { list, id } = req.body;
+    const jsonList = JSON.parse(list);
+
+    User.updateOne(
+      { _id: id },
+      {
+        $set: {
+          vouchers: jsonList
+        }
+      }
+    ).then((response) => {
+      if (response) {
+        res.send({ message: `Success to update user ${element._id}` });
+      } else {
+        res.send({ message: `Invalid update` });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.sendVouchers = async (req, res) => {
+  try {
+    const { list, voucher } = req.body;
+    const jsonList = JSON.parse(list);
+
+    if (jsonList != undefined) {
+      jsonList.forEach((element) => {
+        console.log(element.vouchers);
+        let voucherList = element.vouchers;
+
+        voucherList.push(voucher);
+        console.log(voucherList);
+
+        User.updateOne(
+          { _id: element._id },
+          {
+            $set: {
+              vouchers: voucherList
+            }
+          }
+        ).then((response) => {
+          if (response) {
+            res.send({ message: `Success to update user ${element._id}` });
+          } else {
+            res.send({ message: `Invalid update` });
+          }
+        });
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 exports.register = async (req, res) => {
   try {
     const { userName, outsorced, area } = req.body;
@@ -100,7 +158,7 @@ exports.generateCard = async (req, res) => {
   context.fillStyle = "#000";
   context.font = applyText(canvas, OBJcard.name);
   context.fillStyle = "#000";
-  context.fillText(OBJcard.name, 60, height / 2 + 300);
+  context.fillText(OBJcard.name.toUpperCase(), 60, height / 2 + 300);
 
   context.drawImage(heinekenLogo, 60, height / 2 + 350, width - 150, 110);
   context.save();
